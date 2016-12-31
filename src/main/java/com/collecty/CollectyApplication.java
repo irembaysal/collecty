@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CollectyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CollectyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CollectyApplication.class, args);
+
+
+    }
 }
