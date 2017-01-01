@@ -11,16 +11,18 @@ public class User {
 	
 	private String username;
 	private String password;
+	private String role; //it can be companyManager, dealerUser, customer
 	
 
 	public User() {
 		super();
 	}
 	
-	public User(String username, String password) {
+	public User(String username, String password, String role) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
 	
 	public Long getId() {
@@ -41,6 +43,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

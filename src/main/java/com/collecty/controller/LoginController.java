@@ -23,7 +23,7 @@ public class LoginController {
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public @ResponseBody User register(@RequestParam(value="username") String username, @RequestParam(value="password") String password)
 	{
-		return userService.insertNewUser(username, password);
+		return userService.insertNewUser(username, password, "customer");
 	}
 	
 	@RequestMapping(value="/checkUserExist", method=RequestMethod.GET)

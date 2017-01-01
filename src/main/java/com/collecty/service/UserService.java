@@ -31,9 +31,9 @@ public class UserService {
 	}
 	
 	
-	public User insertNewUser(String username, String password)
+	public User insertNewUser(String username, String password, String role)
 	{
-		return userRepository.save(new User(username,password));
+		return userRepository.save(new User(username, password, role));
 
 	}
 
