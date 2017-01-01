@@ -10,5 +10,9 @@ public class ResponseUtil {
     public static final String SERVICE_TYPE_WARNING = "warning";
     public static final String SERVICE_TYPE_ERROR = "error";
 
+    public static final String SERVICE_MESSAGE_USER_EXIST_TRUE = "User exists";
+    public static final String SERVICE_MESSAGE_USER_EXIST_FALSE = "This username is available";
+
+
 
 }

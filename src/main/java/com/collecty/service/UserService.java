@@ -2,6 +2,8 @@ package com.collecty.service;
 
 import java.util.List;
 
+import com.collecty.dto.ServiceDto;
+import com.collecty.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -14,10 +16,18 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public boolean checkUserExist(String username)
+	public ServiceDto checkUserExist(String username)
 	{
+		ServiceDto serviceDto = new ServiceDto();
 		List<User> users = userRepository.findByUsername(username);
-		return !CollectionUtils.isEmpty(users);
+		if(!CollectionUtils.isEmpty(users)){
+			serviceDto.setMessage(ResponseUtil.SERVICE_MESSAGE_USER_EXIST_TRUE);
+			serviceDto.setType(ResponseUtil.SERVICE_TYPE_SUCCESS);
+		}else {
+			serviceDto.setMessage(ResponseUtil.SERVICE_MESSAGE_USER_EXIST_FALSE);
+			serviceDto.setType(ResponseUtil.SERVICE_TYPE_ERROR);
+		}
+		return  serviceDto;
 	}
 	
 	
