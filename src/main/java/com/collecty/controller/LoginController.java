@@ -1,14 +1,13 @@
 package com.collecty.controller;
 
 import com.collecty.dto.ServiceDto;
+import com.collecty.dto.UserDto;
+import com.collecty.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.collecty.entity.User;
 import com.collecty.service.UserService;
@@ -21,9 +20,17 @@ public class LoginController {
 	UserService userService;
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public @ResponseBody User register(@RequestParam(value="username") String username, @RequestParam(value="password") String password)
+	public ResponseEntity<ServiceDto> register(@RequestBody UserDto userDto) throws Exception
 	{
-		return userService.insertNewUser(username, password, "customer");
+	    try {
+            ServiceDto insertUserSuccessDto = userService.insertNewUser(userDto);
+            return new ResponseEntity<>(insertUserSuccessDto,HttpStatus.OK);
+        }catch (Exception e){
+            ServiceDto insertUserFailDto = new ServiceDto();
+            insertUserFailDto.setMessage(ResponseUtil.SERVICE_MESSAGE_INSERT_USER_FAILED);
+            insertUserFailDto.setType(ResponseUtil.SERVICE_TYPE_ERROR);
+            return new ResponseEntity<>(insertUserFailDto,HttpStatus.BAD_REQUEST);
+        }
 	}
 	
 	@RequestMapping(value="/checkUserExist", method=RequestMethod.GET)

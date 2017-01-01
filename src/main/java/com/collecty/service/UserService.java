@@ -3,6 +3,7 @@ package com.collecty.service;
 import java.util.List;
 
 import com.collecty.dto.ServiceDto;
+import com.collecty.dto.UserDto;
 import com.collecty.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +32,11 @@ public class UserService {
 	}
 	
 	
-	public User insertNewUser(String username, String password, String role)
-	{
-		return userRepository.save(new User(username, password, role));
-
+	public ServiceDto insertNewUser(UserDto userDto){
+		ServiceDto serviceDto = new ServiceDto();
+		userRepository.save(new User(userDto.getUsername(), userDto.getPassword(), userDto.getRole()));
+		serviceDto.setMessage(ResponseUtil.SERVICE_MESSAGE_INSERT_USER_SUCCESS);
+		serviceDto.setType(ResponseUtil.SERVICE_TYPE_SUCCESS);
+		return serviceDto;
 	}
-
-
-	
 }
